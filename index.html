@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PP Trading — Disposable Items</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#14532d}a:hover{color:#0b3a1e}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif; color: #1c2321; background: #f7f8f4; min-height: 100vh">
+
+<header style="background: #ffffff; border-bottom: 1px solid #e3e7df">
+<div style="max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" onClick="{{go.top}}" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #0f3d22">
+<svg aria-hidden="true" width="52" height="52" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0f3d22"></rect><path d="M17 48V16h11a9 9 0 0 1 0 18H17" fill="none" stroke="{{accent}}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M31 48V25h9.5a8 8 0 0 1 0 16H31" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.02em; text-transform: uppercase">PP Trading</span>
+</a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; font-size: 15px; font-weight: 500">
+<a href="#products" onClick="{{go.products}}" style="text-decoration: none; padding: 10px 0">Products</a>
+<a href="#why" onClick="{{openWhy}}" style="text-decoration: none; padding: 10px 0">Why us</a>
+<a href="#bulk" onClick="{{openBulk}}" style="text-decoration: none; padding: 10px 0">Bulk orders</a>
+<a href="#reviews" onClick="{{openReviews}}" style="text-decoration: none; padding: 10px 0">Reviews</a>
+<a href="#share" onClick="{{go.share}}" style="text-decoration: none; padding: 10px 0">Share</a>
+<a href="#order" onClick="{{openOrder}}" style="text-decoration: none; padding: 10px 0; font-weight: 600">{{cartNav}}</a>
+<a href="#contact" onClick="{{openContact}}" style="text-decoration: none; padding: 12px 20px; background: {{brand}}; color: #ffffff; border-radius: 999px">Contact us</a>
+</nav>
+</div>
+</header>
+
+<sc-if value="{{showFloatCart}}" hint-placeholder-val="{{ false }}">
+<a href="#order" onClick="{{openOrder}}" style="position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 60; display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: 16px; font-weight: 700; padding: 14px 22px; background: #0f3d22; color: #ffffff; border-radius: 999px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25)"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"></path><path d="M6 6L5 3H2"></path><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle></svg>{{cartNav}} · {{cartTotal}}</a>
+</sc-if>
+
+<sc-if value="{{detailOpen}}" hint-placeholder-val="{{ false }}">
+<section aria-labelledby="pd-title" style="background: #f1f5ee">
+<div style="max-width: 1280px; margin: 0 auto; padding: 24px 24px 88px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px">
+<button type="button" onClick="{{closeDetail}}" style="font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 18px 0 12px; display: flex; align-items: center; gap: 6px; background: #ffffff; color: #0f3d22; border: 1px solid #c9d0c5; border-radius: 999px; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f3d22" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back to products</button>
+<span style="font-size: 14px; color: #4a5650">Products / {{d.catLabel}} / <strong style="color: #1c2321">{{d.name}}</strong></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="position: relative; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 24px; overflow: hidden">
+<img src="{{d.mainImg}}" alt="{{d.name}}" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: contain; background: #ffffff">
+<sc-if value="{{d.saveText}}" hint-placeholder-val="{{ false }}">
+<span style="position: absolute; top: 16px; left: 16px; font-size: 14px; font-weight: 800; color: #0f3d22; background: {{accent}}; padding: 8px 14px; border-radius: 999px">{{d.saveText}}</span>
+</sc-if>
+</div>
+<sc-if value="{{d.hasGallery}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{d.thumbs}}" as="t" hint-placeholder-count="4">
+<button type="button" onClick="{{t.pick}}" aria-label="{{t.aria}}" aria-pressed="{{t.pressed}}" style="{{t.style}}"><img src="{{t.src}}" alt="" style="display: block; width: 100%; height: 100%; object-fit: cover"></button>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<div style="flex: 1 1 440px; min-width: 0; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 24px; padding: clamp(22px, 3.5vw, 36px); display: flex; flex-direction: column; gap: 20px; box-sizing: border-box">
+<span style="align-self: flex-start; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #14532d; background: #e3f0e6; padding: 6px 12px; border-radius: 999px">{{d.catLabel}}</span>
+<h1 id="pd-title" style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; letter-spacing: -0.03em; color: #0f3d22">{{d.name}}</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #47524d">{{d.desc}}</p>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 16px 0; border-top: 1px solid #edf1ea; border-bottom: 1px solid #edf1ea">
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 700; color: #14532d">{{d.price}}</span>
+<sc-if value="{{d.mrp}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 17px; color: #4a5650">MRP <s>{{d.mrp}}</s></span>
+</sc-if>
+<span style="font-size: 14px; color: #4a5650">{{d.info}}</span>
+<span style="flex-basis: 100%; font-size: 16px; font-weight: 700; color: #0f3d22">{{d.perPieceText}}</span>
+</div>
+<div style="display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; background: #e3f0e6; border-radius: 16px">
+<svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"></path><path d="M8.5 12l2.5 2.5 4.5-5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #14532d">Quality</span><span style="font-size: 16px; font-weight: 600; color: #0f3d22">{{d.quality}}</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #0f3d22">Bulk price</h2>
+<sc-if value="{{d.hasOptions}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 14px; color: #4a5650">Buy more, pay less. Tap a pack size to choose it.</p>
+<div role="group" aria-label="Choose pack size" style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{d.options}}" as="o" hint-placeholder-count="5">
+<button type="button" onClick="{{o.pick}}" aria-pressed="{{o.pressed}}" style="{{o.rowStyle}}"><span style="font-weight: 700">{{o.label}}</span><span style="font-size: 14px; opacity: 0.85">{{o.each}}</span><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 18px; font-weight: 700">{{o.total}}</span></button>
+</sc-for>
+</div>
+<span style="font-size: 14px; color: #47524d">{{d.optNote}}</span>
+</sc-if>
+<sc-if value="{{d.noTiers}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #47524d">Buying for a shop, café, caterer or event? Order ₹10,000 or more of this product and get 10% off.</p>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" onClick="{{d.openBulk}}" style="font: inherit; font-size: 15px; font-weight: 700; min-height: 48px; padding: 0 20px; background: {{accent}}; color: #0f3d22; border: none; border-radius: 999px; cursor: pointer">Bulk order · 10% off</button>
+<a href="{{d.bulkLink}}" target="_blank" rel="noopener" style="display: flex; align-items: center; text-decoration: none; font-size: 15px; font-weight: 600; min-height: 46px; padding: 0 18px; border: 1px solid #14532d; border-radius: 999px">Ask on WhatsApp</a>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<span id="pd-qty" style="font-size: 15px; font-weight: 600">Quantity</span>
+<div role="group" aria-labelledby="pd-qty" style="display: flex; align-items: center; gap: 6px; padding: 4px; border: 1px solid #c9d0c5; border-radius: 999px">
+<button type="button" onClick="{{d.decQty}}" aria-label="Decrease quantity" style="font: inherit; font-size: 22px; width: 44px; height: 44px; border-radius: 999px; border: none; background: #f1f5ee; color: #0f3d22; cursor: pointer">−</button>
+<span style="min-width: 36px; text-align: center; font-size: 18px; font-weight: 700">{{d.qty}}</span>
+<button type="button" onClick="{{d.incQty}}" aria-label="Increase quantity" style="font: inherit; font-size: 22px; width: 44px; height: 44px; border-radius: 999px; border: none; background: #f1f5ee; color: #0f3d22; cursor: pointer">+</button>
+</div>
+<span style="font-size: 15px; color: #4a5650">Total: <strong style="color: #0f3d22">{{d.qtyTotal}}</strong></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" onClick="{{d.addQty}}" style="flex: 1 1 200px; font: inherit; font-size: 17px; font-weight: 700; min-height: 56px; padding: 0 20px; background: #14532d; color: #ffffff; border: none; border-radius: 999px; cursor: pointer">Add to order</button>
+<button type="button" onClick="{{d.buyNow}}" style="flex: 1 1 200px; font: inherit; font-size: 17px; font-weight: 700; min-height: 56px; padding: 0 20px; background: {{accent}}; color: #0f3d22; border: none; border-radius: 999px; cursor: pointer">Buy now</button>
+</div>
+<sc-if value="{{d.inCart}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 15px; font-weight: 600; color: #15803d">✓ {{d.inCartText}}</span>
+</sc-if>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+<div style="flex: 1 1 440px; min-width: 0; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 24px; padding: clamp(22px, 3.5vw, 32px); display: flex; flex-direction: column; gap: 14px; box-sizing: border-box">
+<h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f3d22">Key features</h2>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{d.features}}" as="f" hint-placeholder-count="4">
+<li style="display: flex; align-items: flex-start; gap: 10px; font-size: 16px; line-height: 1.45"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 1px"><path d="M20 6L9 17l-5-5"></path></svg><span>{{f.text}}</span></li>
+</sc-for>
+</ul>
+<sc-if value="{{d.uses}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 6px 0 0; font-size: 15px; line-height: 1.55; padding-top: 14px; border-top: 1px solid #edf1ea"><strong>Good for:</strong> {{d.uses}}</p>
+</sc-if>
+</div>
+<div style="flex: 1 1 440px; min-width: 0; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 24px; padding: clamp(22px, 3.5vw, 32px); display: flex; flex-direction: column; gap: 14px; box-sizing: border-box">
+<h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f3d22">Specifications</h2>
+<dl style="margin: 0; display: flex; flex-direction: column; gap: 1px; background: #e1e8dc; border: 1px solid #e1e8dc; border-radius: 12px; overflow: hidden">
+<div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 12px; padding: 12px 16px; background: #ffffff; font-size: 15px"><dt style="color: #4a5650">Product</dt><dd style="margin: 0; font-weight: 600">{{d.name}}</dd></div>
+<div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 12px; padding: 12px 16px; background: #ffffff; font-size: 15px"><dt style="color: #4a5650">Quality</dt><dd style="margin: 0; font-weight: 600">{{d.quality}}</dd></div>
+<sc-for list="{{d.specs}}" as="s" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 12px; padding: 12px 16px; background: #ffffff; font-size: 15px"><dt style="color: #4a5650">{{s.label}}</dt><dd style="margin: 0; font-weight: 600">{{s.value}}</dd></div>
+</sc-for>
+<div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 12px; padding: 12px 16px; background: #ffffff; font-size: 15px"><dt style="color: #4a5650">Shipping</dt><dd style="margin: 0; font-weight: 600">Flat ₹99 per order, all India</dd></div>
+</dl>
+</div>
+</div>
+<sc-if value="{{d.hasRelated}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 16px; padding-top: 12px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.02em; color: #0f3d22">More in {{d.catLabel}}</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px">
+<sc-for list="{{d.related}}" as="r" hint-placeholder-count="3">
+<button type="button" onClick="{{r.openDetail}}" style="font: inherit; text-align: left; padding: 0; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 18px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column"><img src="{{r.img}}" alt="" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover"><span style="padding: 12px 14px 2px; font-size: 16px; font-weight: 700; color: #0f3d22">{{r.name}}</span><span style="padding: 0 14px 14px; font-size: 15px; font-weight: 600; color: #14532d">{{r.price}}</span></button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{showMain}}" hint-placeholder-val="{{ true }}">
+<section id="top" style="background: #0f3d22; color: #ffffff; overflow: hidden">
+<div style="max-width: 1280px; margin: 0 auto; padding: clamp(40px, 6vw, 72px) 24px clamp(48px, 6vw, 80px); display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px)">
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0f3d22; background: {{accent}}; padding: 8px 14px; border-radius: 999px">Wholesale &amp; retail</span>
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; border: 1px solid #4f7a5f; padding: 7px 14px; border-radius: 999px">Hisar, Haryana</span>
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; border: 1px solid #4f7a5f; padding: 7px 14px; border-radius: 999px">Delivery all over India</span>
+</div>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: clamp(4.5rem, 15vw, 13.5rem); line-height: 0.85; letter-spacing: -0.045em; text-transform: uppercase">PP <span style="color: {{accent}}">Trading</span></h1>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 28px">
+<p style="margin: 0; max-width: 600px; font-size: clamp(1.1rem, 1.6vw, 1.4rem); line-height: 1.55; color: #d3e6d9">Everything disposable, all in one shop. {{heroLine}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#products" style="text-decoration: none; padding: 18px 30px; background: {{accent}}; color: #0f3d22; border-radius: 999px; font-weight: 700; font-size: 17px">Shop products</a>
+<a href="#order" onClick="{{openOrder}}" style="text-decoration: none; padding: 17px 29px; border: 1px solid #ffffff; color: #ffffff; border-radius: 999px; font-weight: 600; font-size: 17px">Your order</a>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px">
+<img src="./assets/51e3f3898fc013c6b57d269dbe557621.jpg" alt="Party combo" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 18px; background: #ffffff">
+<img src="./assets/735e1163cac180febf55263a81b12ea4.jpg" alt="Cold coffee sipper glasses" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 18px; background: #ffffff">
+<img src="./assets/bf3181c7fa352e1b01d095a933f91340.jpg" alt="Paper straws" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 18px; background: #ffffff">
+<img src="./assets/8312abb412b60ebc4e67e3dd0f73c02d.jpg" alt="Meal tray with lid" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 18px; background: #ffffff">
+<img src="./assets/4c3044579fed2bdd2425b56c6863be19.jpg" alt="Face tissue boxes" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 18px; background: #ffffff">
+<img src="./assets/50331d21e4fadaf41fe488b459c98771.jpg" alt="Wooden spoons" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 18px; background: #ffffff">
+</div>
+</div>
+</section>
+
+<section aria-label="Highlights" style="background: {{accent}}; color: #0f3d22">
+<div style="max-width: 1280px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; font-size: 16px; font-weight: 600">
+<span style="display: flex; align-items: center; gap: 10px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f3d22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Bhagat Singh Chowk, Hisar</span>
+<span style="display: flex; align-items: center; gap: 10px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f3d22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Order on WhatsApp</span>
+<span style="display: flex; align-items: center; gap: 10px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f3d22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="10"></rect><path d="M15 9h4l3 3v4h-7"></path><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg>Flat ₹99 shipping, all India</span>
+<span style="display: flex; align-items: center; gap: 10px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f3d22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Open daily from 10 AM</span>
+</div>
+</section>
+
+<section id="products" style="background: #f1f5ee">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 680px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #14532d">PP Trading store</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1; letter-spacing: -0.03em; color: #0f3d22">Our products</h2>
+<p style="margin: 0; font-size: 1.1rem; line-height: 1.6; color: #47524d">Quality disposables for homes, cafés, restaurants and parties. Tap a photo or “Details” to see full features and specifications.</p>
+</div>
+<div role="group" aria-label="Filter products by category" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="6">
+<button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="{{c.style}}">{{c.label}}</button>
+</sc-for>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 24px">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="8">
+<article style="background: #ffffff; border: 1px solid #e1e8dc; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 2px rgba(15, 61, 34, 0.05), 0 12px 32px rgba(15, 61, 34, 0.08)">
+<div style="position: relative">
+<button type="button" onClick="{{p.openDetail}}" aria-label="{{p.detailAria}}" style="display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in">
+<img src="{{p.img}}" alt="{{p.name}}" style="{{p.imgStyle}}">
+</button>
+<span style="position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #0f3d22; background: rgba(255, 255, 255, 0.95); padding: 6px 10px; border-radius: 999px">{{p.catLabel}}</span>
+<sc-if value="{{p.saveText}}" hint-placeholder-val="{{ false }}">
+<span style="position: absolute; top: 12px; right: 12px; font-size: 12px; font-weight: 800; color: #0f3d22; background: {{accent}}; padding: 6px 10px; border-radius: 999px">{{p.saveText}}</span>
+</sc-if>
+</div>
+<div style="padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
+<h3 style="margin: 0; font-size: 19px; font-weight: 700; color: #0f3d22">{{p.name}}</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #47524d">{{p.desc}}</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; flex-grow: 1">
+<sc-for list="{{p.featuresShort}}" as="f" hint-placeholder-count="3">
+<li style="display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.45; color: #1c2321"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 1px"><path d="M20 6L9 17l-5-5"></path></svg><span>{{f.text}}</span></li>
+</sc-for>
+</ul>
+<sc-if value="{{p.info}}" hint-placeholder-val="{{ false }}">
+<span style="align-self: flex-start; font-size: 13px; font-weight: 600; color: #14532d; background: #e3f0e6; padding: 6px 10px; border-radius: 8px">{{p.info}}</span>
+</sc-if>
+<sc-if value="{{p.hasOptions}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 600; color: #4a5650">{{p.chooseLabel}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{p.options}}" as="o" hint-placeholder-count="5">
+<button type="button" onClick="{{o.pick}}" aria-pressed="{{o.pressed}}" aria-label="{{o.aria}}" style="{{o.style}}">{{o.label}}</button>
+</sc-for>
+</div>
+<span style="font-size: 13px; color: #47524d">{{p.optNote}}</span>
+</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding-top: 10px; border-top: 1px solid #edf1ea">
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: 26px; color: #14532d">{{p.price}}</span>
+<sc-if value="{{p.mrp}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 14px; color: #4a5650">MRP <s>{{p.mrp}}</s></span>
+</sc-if>
+<span style="flex-basis: 100%; font-size: 14px; font-weight: 700; color: #0f3d22">{{p.perPieceText}}</span>
+</div>
+<div style="display: flex; gap: 8px">
+<button type="button" onClick="{{p.order}}" style="flex: 1 1 auto; font: inherit; font-size: 15px; font-weight: 700; min-height: 48px; padding: 0 16px; background: #14532d; color: #ffffff; border: none; border-radius: 999px; cursor: pointer">Add to order</button>
+<button type="button" onClick="{{p.openDetail}}" style="flex: none; font: inherit; font-size: 15px; font-weight: 600; min-height: 48px; padding: 0 18px; background: #ffffff; color: #14532d; border: 1px solid #14532d; border-radius: 999px; cursor: pointer">Details</button>
+</div>
+<sc-if value="{{p.inCart}}" hint-placeholder-val="{{ false }}">
+<a href="#order" onClick="{{openOrder}}" style="font-size: 14px; font-weight: 600; padding: 4px 0">{{p.inCartText}} · View order</a>
+</sc-if>
+</div>
+</article>
+</sc-for>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{orderPage}}" hint-placeholder-val="{{ false }}">
+<div style="background: #0f3d22; color: #ffffff">
+<div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 44px; display: flex; flex-direction: column; gap: 20px">
+<button type="button" onClick="{{go.products}}" style="align-self: flex-start; font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 18px 0 12px; display: flex; align-items: center; gap: 6px; background: transparent; color: #ffffff; border: 1px solid #4f7a5f; border-radius: 999px; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Continue shopping</button>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase">Your <span style="color: {{accent}}">order</span></h1>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 12px; font-size: 15px; font-weight: 600">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="4">
+<span style="{{s.style}}">{{s.label}}</span>
+</sc-for>
+</div>
+</div>
+</div>
+<section id="order" style="max-width: 1200px; margin: 0 auto; padding: 40px 24px 88px">
+<div style="background: #ffffff; border: 1px solid #e3e7df; border-radius: 24px; padding: clamp(24px, 4vw, 48px); display: flex; flex-wrap: wrap; gap: 40px">
+<sc-if value="{{cartStep}}" hint-placeholder-val="{{ true }}">
+<div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(2rem, 3.5vw, 2.75rem); letter-spacing: -0.02em">Your order</h2>
+<sc-if value="{{cartEmpty}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 32px; background: #f7f8f4; border: 1px dashed #b9c2b4; border-radius: 16px">
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #47524d">Your order is empty. Tap “Add to order” on any product and it will appear here.</p>
+<a href="#products" onClick="{{go.products}}" style="text-decoration: none; font-size: 15px; font-weight: 600; padding: 12px 20px; border: 1px solid #14532d; border-radius: 999px">Browse products</a>
+</div>
+</sc-if>
+<sc-if value="{{cartHas}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; border-top: 1px solid #e3e7df">
+<sc-for list="{{cart}}" as="c" hint-placeholder-count="2">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 16px 0; border-bottom: 1px solid #e3e7df">
+<div style="flex: 1 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 16px; font-weight: 600">{{c.label}}</span>
+<span style="font-size: 14px; color: #4a5650">{{c.each}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 6px">
+<button type="button" onClick="{{c.dec}}" aria-label="{{c.decLabel}}" style="font: inherit; font-size: 20px; width: 44px; height: 44px; border-radius: 999px; border: 1px solid #c9d0c5; background: #ffffff; color: #14532d; cursor: pointer">−</button>
+<span style="min-width: 32px; text-align: center; font-size: 16px; font-weight: 600">{{c.qty}}</span>
+<button type="button" onClick="{{c.inc}}" aria-label="{{c.incLabel}}" style="font: inherit; font-size: 20px; width: 44px; height: 44px; border-radius: 999px; border: 1px solid #c9d0c5; background: #ffffff; color: #14532d; cursor: pointer">+</button>
+</div>
+<span style="min-width: 80px; text-align: right; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 18px; font-weight: 700">{{c.lineTotal}}</span>
+<button type="button" onClick="{{c.remove}}" aria-label="{{c.removeLabel}}" style="font: inherit; font-size: 14px; font-weight: 500; min-height: 44px; padding: 0 8px; border: none; background: none; color: #9a3412; text-decoration: underline; cursor: pointer">Remove</button>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-top: 8px">
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px"><span>Subtotal ({{cartCountText}})</span><span style="font-weight: 600">{{cartSubtotal}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px"><span>Shipping</span><span style="font-weight: 600">{{shipFlat}}</span></div>
+</div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 12px; border-top: 1px solid #e3e7df">
+<span style="font-size: 18px; font-weight: 600">Total</span>
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 28px; font-weight: 700; color: #14532d">{{cartTotal}}</span>
+</div>
+<p style="margin: 0; font-size: 14px; color: #4a5650">Flat ₹99 shipping on every order.</p>
+</sc-if>
+</div>
+</sc-if>
+<sc-if value="{{cartStepHas}}" hint-placeholder-val="{{ false }}">
+<div style="flex: 1 1 300px; min-width: 0; background: #f7f8f4; border: 1px solid #e3e7df; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px; align-self: flex-start">
+<h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f3d22">Order summary</h3>
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px"><span>Subtotal ({{cartCountText}})</span><span style="font-weight: 600">{{cartSubtotal}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px"><span>Shipping</span><span style="font-weight: 600">{{shipFlat}}</span></div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 12px; border-top: 1px solid #e3e7df"><span style="font-size: 18px; font-weight: 700">Total</span><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 28px; font-weight: 700; color: #14532d">{{cartTotal}}</span></div>
+<button type="button" onClick="{{goDetails}}" style="font: inherit; font-size: 17px; font-weight: 700; min-height: 56px; padding: 0 20px; background: #14532d; color: #ffffff; border: none; border-radius: 999px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px">Proceed to delivery details<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+<button type="button" onClick="{{go.products}}" style="font: inherit; font-size: 16px; font-weight: 600; min-height: 50px; padding: 0 20px; background: #ffffff; color: #14532d; border: 1px solid #14532d; border-radius: 999px; cursor: pointer">Add more products</button>
+</div>
+</sc-if>
+<sc-if value="{{detailsStep}}" hint-placeholder-val="{{ false }}">
+<div style="order: 2; flex: 1 1 300px; min-width: 0; background: #f7f8f4; border: 1px solid #e3e7df; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px; align-self: flex-start">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f3d22">Order summary</h3>
+<button type="button" onClick="{{goCart}}" style="font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 10px; background: none; border: none; color: #14532d; text-decoration: underline; cursor: pointer">Edit order</button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{cart}}" as="c" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 15px"><span style="min-width: 0">{{c.label}} × {{c.qty}}</span><span style="font-weight: 600; white-space: nowrap">{{c.lineTotal}}</span></div>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 15px; padding-top: 10px; border-top: 1px solid #e3e7df"><span>Subtotal</span><span style="font-weight: 600">{{cartSubtotal}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 15px"><span>Shipping</span><span style="font-weight: 600">{{shipFlat}}</span></div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 10px; border-top: 1px solid #e3e7df"><span style="font-size: 18px; font-weight: 700">Total</span><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 26px; font-weight: 700; color: #14532d">{{cartTotal}}</span></div>
+</div>
+<div style="flex: 1 1 440px; min-width: 0; background: #f7f8f4; border: 1px solid #e3e7df; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px; align-self: flex-start">
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; color: #0f3d22">Delivery details</h3>
+<label for="o-name" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Your name<input id="o-name" type="text" autocomplete="name" value="{{form.name}}" onChange="{{setName}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<label for="o-phone" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Phone number<input id="o-phone" type="tel" autocomplete="tel" value="{{form.phone}}" onChange="{{setPhone}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<label for="o-email" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Email<input id="o-email" type="email" autocomplete="email" value="{{form.email}}" onChange="{{setEmail}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<label for="o-address" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Delivery address<textarea id="o-address" rows="3" autocomplete="street-address" value="{{form.address}}" onChange="{{setAddress}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff; resize: vertical"></textarea></label>
+<label for="o-pin" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Pincode<input id="o-pin" type="text" inputmode="numeric" maxlength="6" autocomplete="postal-code" value="{{form.pincode}}" onChange="{{setPincode}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 20px; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 16px">
+<h4 style="margin: 0; font-size: 17px; font-weight: 700; color: #0f3d22">Payment: pay first, then we deliver</h4>
+<sc-if value="{{upiReady}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #47524d">Pay the total by UPI (GPay, PhonePe, Paytm) to <strong style="color: #1c2321; overflow-wrap: anywhere">{{upiId}}</strong>. Then enter your UPI transaction ID below.</p>
+<sc-if value="{{cartHas}}" hint-placeholder-val="{{ false }}">
+<a href="{{upiLink}}" style="text-decoration: none; text-align: center; font-weight: 700; font-size: 16px; padding: 15px; background: {{accent}}; color: #0f3d22; border-radius: 999px">Pay {{cartTotal}} by UPI</a>
+</sc-if>
+<label for="o-utr" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">UPI transaction ID (after payment)<input id="o-utr" type="text" value="{{form.utr}}" onChange="{{setUtr}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+</sc-if>
+<sc-if value="{{upiMissing}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #47524d">Send your order and we will reply on WhatsApp with our UPI payment details. Your order is dispatched after payment.</p>
+</sc-if>
+</div>
+<sc-if value="{{sendReady}}" hint-placeholder-val="{{ false }}">
+<a href="{{waLink}}" target="_blank" rel="noopener" style="text-decoration: none; text-align: center; font-weight: 600; font-size: 16px; padding: 16px; background: #14532d; color: #ffffff; border-radius: 999px">Send order on WhatsApp</a>
+</sc-if>
+<sc-if value="{{sendBlocked}}" hint-placeholder-val="{{ true }}">
+<span style="text-align: center; font-weight: 600; font-size: 16px; padding: 16px; background: #e3e7df; color: #4a5650; border-radius: 999px">{{sendBlockedText}}</span>
+</sc-if>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4a5650">Your order opens in WhatsApp with all the details filled in. Just press send and we’ll confirm it.</p>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{bulkPage}}" hint-placeholder-val="{{ false }}">
+<div style="background: #0f3d22; color: #ffffff">
+<div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 44px; display: flex; flex-direction: column; gap: 20px">
+<button type="button" onClick="{{go.top}}" style="align-self: flex-start; font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 18px 0 12px; display: flex; align-items: center; gap: 6px; background: transparent; color: #ffffff; border: 1px solid #4f7a5f; border-radius: 999px; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back to home</button>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 28px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase">Bulk <span style="color: {{accent}}">orders</span></h1>
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 700; color: #0f3d22; background: {{accent}}; padding: 8px 20px; border-radius: 999px; transform: rotate(-3deg)">10% OFF</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<span style="font-size: 15px; font-weight: 600; padding: 8px 14px; border: 1px solid #4f7a5f; border-radius: 999px">Minimum order ₹10,000</span>
+<span style="font-size: 15px; font-weight: 600; padding: 8px 14px; border: 1px solid #4f7a5f; border-radius: 999px">One product per bulk order</span>
+<span style="font-size: 15px; font-weight: 600; padding: 8px 14px; border: 1px solid #4f7a5f; border-radius: 999px">10% off the total</span>
+</div>
+</div>
+</div>
+<section id="bulk-order" style="max-width: 1200px; margin: 0 auto; padding: 40px 24px 88px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: #0f3d22">1. Choose one product</h2>
+<div role="group" aria-label="Choose a product for bulk order" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px">
+<sc-for list="{{bulkProducts}}" as="b" hint-placeholder-count="8">
+<button type="button" onClick="{{b.pick}}" aria-pressed="{{b.pressed}}" style="{{b.style}}"><img src="{{b.img}}" alt="" style="display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover"><span style="padding: 12px 14px 0; font-size: 16px; font-weight: 700; color: #0f3d22">{{b.name}}</span><span style="padding: 2px 14px 0; font-size: 13px; color: #4a5650">{{b.packLabel}}</span><span style="padding: 6px 14px 0; font-size: 17px; font-weight: 700; color: #14532d">{{b.packPrice}} <span style="font-size: 13px; font-weight: 600; color: #4a5650">/ pack</span></span><span style="padding: 2px 14px 14px; font-size: 13px; font-weight: 700; color: #0f3d22">{{b.perPiece}}</span></button>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{bulkNoSel}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; padding: 24px; background: #ffffff; border: 1px dashed #b9c2b4; border-radius: 18px; font-size: 16px; color: #47524d; text-align: center">Tap a product above to see your bulk price.</p>
+</sc-if>
+<sc-if value="{{bulkHasSel}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 1 1 440px; min-width: 0; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 24px; padding: clamp(22px, 3.5vw, 32px); display: flex; flex-direction: column; gap: 18px; box-sizing: border-box">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: #0f3d22">2. Choose quantity</h2>
+<div style="display: flex; align-items: center; gap: 14px">
+<img src="{{bk.img}}" alt="" style="width: 80px; height: 80px; object-fit: cover; border-radius: 14px; flex: none">
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-size: 18px; font-weight: 700; color: #0f3d22">{{bk.name}}</span><span style="font-size: 14px; color: #4a5650">{{bk.packLabel}} · {{bk.packPrice}} per pack</span><span style="font-size: 14px; font-weight: 700; color: #0f3d22">{{bk.perPiece}}</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<label for="bk-qty" style="font-size: 15px; font-weight: 600">Packs</label>
+<div style="display: flex; align-items: center; gap: 6px; padding: 4px; border: 1px solid #c9d0c5; border-radius: 999px">
+<button type="button" onClick="{{bk.dec}}" aria-label="One pack less" style="font: inherit; font-size: 22px; width: 44px; height: 44px; border-radius: 999px; border: none; background: #f1f5ee; color: #0f3d22; cursor: pointer">−</button>
+<input id="bk-qty" type="number" min="1" inputmode="numeric" value="{{bk.qtyStr}}" onChange="{{bk.setQty}}" style="font: inherit; width: 90px; text-align: center; font-size: 18px; font-weight: 700; padding: 8px; border: none; background: transparent">
+<button type="button" onClick="{{bk.inc}}" aria-label="One pack more" style="font: inherit; font-size: 22px; width: 44px; height: 44px; border-radius: 999px; border: none; background: #f1f5ee; color: #0f3d22; cursor: pointer">+</button>
+</div>
+<button type="button" onClick="{{bk.add10}}" style="font: inherit; font-size: 14px; font-weight: 600; min-height: 44px; padding: 0 14px; background: #ffffff; color: #14532d; border: 1px solid #c9d0c5; border-radius: 999px; cursor: pointer">+10 packs</button>
+<button type="button" onClick="{{bk.setMin}}" style="font: inherit; font-size: 14px; font-weight: 600; min-height: 44px; padding: 0 14px; background: #ffffff; color: #14532d; border: 1px solid #c9d0c5; border-radius: 999px; cursor: pointer">{{bk.minLabel}}</button>
+</div>
+<span style="font-size: 14px; color: #4a5650">{{bk.piecesText}}</span>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 18px; background: #f7f8f4; border-radius: 16px">
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px"><span>{{bk.qtyLine}}</span><span style="font-weight: 600">{{bk.subtotal}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px; color: #15803d; font-weight: 700"><span>Bulk discount (10%)</span><span>{{bk.discount}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 16px"><span>Shipping</span><span style="font-weight: 600">{{shipFlat}}</span></div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 10px; border-top: 1px solid #e3e7df"><span style="font-size: 18px; font-weight: 700">Total</span><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 30px; font-weight: 700; color: #14532d">{{bk.total}}</span></div>
+<div style="display: flex; justify-content: space-between; gap: 16px; font-size: 15px; font-weight: 700; color: #0f3d22"><span>Price per piece after discount</span><span>{{bk.perPieceAfter}}</span></div>
+</div>
+<sc-if value="{{bk.below}}" hint-placeholder-val="{{ false }}">
+<p role="status" style="margin: 0; padding: 14px 16px; background: #fff1e6; border: 1px solid #f3c6a5; border-radius: 12px; font-size: 15px; font-weight: 600; color: #9a3412">{{bk.warnText}}</p>
+</sc-if>
+<sc-if value="{{bk.meets}}" hint-placeholder-val="{{ false }}">
+<p role="status" style="margin: 0; padding: 14px 16px; background: #e3f0e6; border-radius: 12px; font-size: 15px; font-weight: 700; color: #14532d">{{bk.saveText}}</p>
+</sc-if>
+</div>
+<div style="flex: 1 1 360px; min-width: 0; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 24px; padding: clamp(22px, 3.5vw, 32px); display: flex; flex-direction: column; gap: 14px; box-sizing: border-box">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: #0f3d22">3. Your details</h2>
+<label for="bk-name" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Your name / shop name<input id="bk-name" type="text" autocomplete="name" value="{{form.name}}" onChange="{{setName}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<label for="bk-phone" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Phone number<input id="bk-phone" type="tel" autocomplete="tel" value="{{form.phone}}" onChange="{{setPhone}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<label for="bk-address" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Delivery address<textarea id="bk-address" rows="3" autocomplete="street-address" value="{{form.address}}" onChange="{{setAddress}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff; resize: vertical"></textarea></label>
+<label for="bk-pin" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Pincode<input id="bk-pin" type="text" inputmode="numeric" maxlength="6" autocomplete="postal-code" value="{{form.pincode}}" onChange="{{setPincode}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: #47524d">Payment first, then delivery. We will confirm your bulk order and share payment details on WhatsApp.</p>
+<sc-if value="{{bk.canSend}}" hint-placeholder-val="{{ false }}">
+<a href="{{bk.waLink}}" target="_blank" rel="noopener" style="text-decoration: none; text-align: center; font-weight: 700; font-size: 17px; padding: 17px; background: #14532d; color: #ffffff; border-radius: 999px">Send bulk order on WhatsApp</a>
+</sc-if>
+<sc-if value="{{bk.below}}" hint-placeholder-val="{{ true }}">
+<span style="text-align: center; font-weight: 600; font-size: 16px; padding: 16px; background: #e3e7df; color: #4a5650; border-radius: 999px">Reach ₹10,000 to send bulk order</span>
+</sc-if>
+</div>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{showWhySec}}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{whyPage}}" hint-placeholder-val="{{ false }}">
+<div style="background: #0f3d22; color: #ffffff">
+<div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 48px; display: flex; flex-direction: column; gap: 20px">
+<button type="button" onClick="{{go.top}}" style="align-self: flex-start; font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 18px 0 12px; display: flex; align-items: center; gap: 6px; background: transparent; color: #ffffff; border: 1px solid #4f7a5f; border-radius: 999px; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back to home</button>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase">Why <span style="color: {{accent}}">us</span></h1>
+<p style="margin: 0; max-width: 640px; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.55; color: #d3e6d9">PP Trading, Bhagat Singh Chowk, Hisar: your one-stop shop for quality disposables, for homes, cafés, restaurants, caterers and events.</p>
+</div>
+</div>
+</sc-if>
+<section id="why" style="max-width: 1200px; margin: 0 auto; padding: 80px 24px; display: flex; flex-direction: column; gap: 40px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(2rem, 3.5vw, 2.75rem); letter-spacing: -0.02em">Why shop with PP Trading</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V7l-8-4-8 4v10l8 4 3-1.5"></path><path d="M4 7l8 4 8-4"></path><path d="M12 11v10"></path></svg>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Wide range in stock</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #47524d">Most items ready to pick up or deliver, so you’re never caught short.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"></path><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Fair wholesale prices</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #47524d">10% off on bulk orders of ₹10,000 or more, plus per-piece prices on every product.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="10"></rect><path d="M15 9h4l3 3v4h-7"></path><circle cx="6" cy="18" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Delivery available</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #47524d">We deliver to shops, restaurants and event venues in Hisar, across Haryana and all over India.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#14532d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Easy ordering</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #47524d">Call, message on WhatsApp, or visit the shop. We’ll sort it quickly.</p>
+</div>
+</div>
+<sc-if value="{{whyPage}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px">
+<div style="background: {{accent}}; color: #0f3d22; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 40px; font-weight: 700; line-height: 1">10% OFF</span><span style="font-size: 16px; font-weight: 600">on bulk orders of ₹10,000 or more</span></div>
+<div style="background: #0f3d22; color: #ffffff; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 40px; font-weight: 700; line-height: 1">₹99</span><span style="font-size: 16px; font-weight: 600; color: #d3e6d9">flat shipping on every order, all India</span></div>
+<div style="background: #ffffff; border: 1px solid #e1e8dc; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 40px; font-weight: 700; line-height: 1; color: #14532d">{{productCount}}</span><span style="font-size: 16px; font-weight: 600; color: #0f3d22">disposable products in one shop</span></div>
+<div style="background: #ffffff; border: 1px solid #e1e8dc; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 8px"><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 40px; font-weight: 700; line-height: 1; color: #14532d">7 days</span><span style="font-size: 16px; font-weight: 600; color: #0f3d22">open: Mon–Sat 10 AM–8 PM, Sun 10 AM–3 PM</span></div>
+</div>
+<div style="background: #ffffff; border: 1px solid #e1e8dc; border-radius: 24px; padding: clamp(22px, 4vw, 40px); display: flex; flex-direction: column; gap: 18px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: -0.02em; color: #0f3d22">Quality you can trust</h2>
+<ul style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px 24px">
+<sc-for list="{{qualityList}}" as="q" hint-placeholder-count="14">
+<li style="display: flex; gap: 10px; font-size: 16px; line-height: 1.5"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M20 6L9 17l-5-5"></path></svg><span><button type="button" onClick="{{q.openDetail}}" aria-label="{{q.detailAria}}" style="font: inherit; font-weight: 700; padding: 0; border: 0; background: none; color: #0f3d22; text-decoration: underline; text-decoration-color: #b9c2b4; text-underline-offset: 3px; cursor: pointer">{{q.name}}</button>: {{q.quality}}</span></li>
+</sc-for>
+</ul>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#products" onClick="{{go.products}}" style="text-decoration: none; font-weight: 700; font-size: 17px; padding: 17px 28px; background: #14532d; color: #ffffff; border-radius: 999px">Shop products</a>
+<a href="#bulk" onClick="{{openBulk}}" style="text-decoration: none; font-weight: 700; font-size: 17px; padding: 17px 28px; background: {{accent}}; color: #0f3d22; border-radius: 999px">Start a bulk order</a>
+<a href="#contact" onClick="{{openContact}}" style="text-decoration: none; font-weight: 600; font-size: 17px; padding: 16px 27px; border: 1px solid #14532d; border-radius: 999px">Contact us</a>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{showMain}}" hint-placeholder-val="{{ true }}">
+<section id="bulk" style="padding: 0 24px 80px">
+<div style="max-width: 1200px; margin: 0 auto; background: #14532d; color: #ffffff; border-radius: 28px; padding: 56px 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.8rem, 3vw, 2.5rem); letter-spacing: -0.02em">Bulk orders: get 10% off</h2>
+<p style="margin: 0; font-size: 1.05rem; line-height: 1.6; color: #d6e8da">Order ₹10,000 or more of any one product and we take 10% off the total. Perfect for shops, cafés, caterers and weddings.</p>
+</div>
+<a href="#bulk" onClick="{{openBulk}}" style="text-decoration: none; padding: 16px 28px; background: {{accent}}; color: #1c2321; border-radius: 999px; font-weight: 700">Start a bulk order</a>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{showReviewsSec}}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{reviewsPage}}" hint-placeholder-val="{{ false }}">
+<div style="background: #0f3d22; color: #ffffff">
+<div style="max-width: 1280px; margin: 0 auto; padding: 28px 24px 48px; display: flex; flex-direction: column; gap: 20px">
+<button type="button" onClick="{{go.top}}" style="align-self: flex-start; font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 18px 0 12px; display: flex; align-items: center; gap: 6px; background: transparent; color: #ffffff; border: 1px solid #4f7a5f; border-radius: 999px; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back to home</button>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase">Customer <span style="color: {{accent}}">reviews</span></h1>
+<p style="margin: 0; max-width: 640px; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.55; color: #d3e6d9">Real words from people who buy from PP Trading. Bought from us? Share your experience below.</p>
+</div>
+</div>
+</sc-if>
+<section id="reviews" style="background: #f1f5ee">
+<div style="max-width: 1280px; margin: 0 auto; padding: 88px 24px; display: flex; flex-direction: column; gap: 36px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 640px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #14532d">Customer reviews</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1; letter-spacing: -0.03em; color: #0f3d22">What our customers say</h2>
+</div>
+<a href="{{reviewLink}}" target="_blank" rel="noopener" style="text-decoration: none; padding: 16px 26px; background: #14532d; color: #ffffff; border-radius: 999px; font-weight: 600">Write a review</a>
+</div>
+<sc-if value="{{reviewsPage}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+<div style="flex: 0 1 280px; min-width: 0; background: #0f3d22; color: #ffffff; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #d3e6d9">Overall rating</span>
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 56px; font-weight: 700; line-height: 1">{{rvSummary.avg}}</span>
+<span role="img" aria-label="{{rvSummary.starsLabel}}" style="font-size: 22px; letter-spacing: 2px; color: {{accent}}">{{rvSummary.stars}}</span>
+<span style="font-size: 15px; color: #d3e6d9">{{rvSummary.countText}}</span>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 700; color: #0f3d22">Reviewed by</h2>
+<sc-if value="{{reviewsHas}}" hint-placeholder-val="{{ false }}">
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px">
+<sc-for list="{{reviews}}" as="r" hint-placeholder-count="4">
+<li style="display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; background: #f1f5ee; border-radius: 999px"><span aria-hidden="true" style="width: 36px; height: 36px; border-radius: 999px; background: #14532d; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px">{{r.initial}}</span><span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 700; color: #0f3d22">{{r.who}}</span><span style="font-size: 13px; color: #b7791f">{{r.stars}}</span></span></li>
+</sc-for>
+</ul>
+</sc-if>
+<sc-if value="{{noReviews}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #47524d">No reviews yet. Be the first to review PP Trading!</p>
+</sc-if>
+</div>
+</div>
+</sc-if>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px">
+<sc-for list="{{reviews}}" as="r" hint-placeholder-count="3">
+<figure style="margin: 0; background: #ffffff; border: 1px solid #e1e8dc; border-radius: 22px; padding: 28px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 1px 2px rgba(15, 61, 34, 0.05), 0 12px 32px rgba(15, 61, 34, 0.08)">
+<sc-if value="{{r.sample}}" hint-placeholder-val="{{ false }}">
+<span style="align-self: flex-start; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #9a3412; background: #fff1e6; border: 1px dashed #f3c6a5; padding: 6px 10px; border-radius: 8px">Sample review · for preview only</span>
+</sc-if>
+<span role="img" aria-label="{{r.starsLabel}}" style="font-size: 20px; letter-spacing: 2px; color: #b7791f">{{r.stars}}</span>
+<blockquote style="margin: 0; font-size: 17px; line-height: 1.6; color: #1c2321">{{r.text}}</blockquote>
+<figcaption style="font-size: 15px; font-weight: 600; color: #14532d">{{r.who}}</figcaption>
+</figure>
+</sc-for>
+<sc-if value="{{noReviews}}" hint-placeholder-val="{{ false }}">
+<div style="grid-column: 1 / -1; padding: 40px 28px; background: #ffffff; border: 1px dashed #b9c2b4; border-radius: 22px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+<p style="margin: 0; font-size: 18px; font-weight: 600; color: #1c2321">Reviews from our customers will appear here.</p>
+<p style="margin: 0; font-size: 15px; color: #47524d">Bought from PP Trading? Tap “Write a review” and tell us how it went.</p>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{reviewsPage}}" hint-placeholder-val="{{ false }}">
+<div style="background: #ffffff; border: 1px solid #e1e8dc; border-radius: 24px; padding: clamp(22px, 4vw, 40px); display: flex; flex-wrap: wrap; gap: 32px">
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: -0.02em; color: #0f3d22">Write your review</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #47524d">Tell us about the product quality, price and delivery. Your review is sent to us on WhatsApp and we add it to this page.</p>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<label for="rv-name" style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Your name<input id="rv-name" type="text" autocomplete="name" value="{{rv.name}}" onChange="{{setRvName}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<label for="rv-city" style="flex: 1 1 180px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">City<input id="rv-city" type="text" autocomplete="address-level2" value="{{rv.city}}" onChange="{{setRvCity}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span id="rv-rating" style="font-size: 14px; font-weight: 500">Rating</span>
+<div role="group" aria-labelledby="rv-rating" style="display: flex; gap: 4px">
+<sc-for list="{{rvStars}}" as="s" hint-placeholder-count="5">
+<button type="button" onClick="{{s.pick}}" aria-label="{{s.aria}}" aria-pressed="{{s.pressed}}" style="{{s.style}}">★</button>
+</sc-for>
+</div>
+</div>
+<label for="rv-text" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Your review<textarea id="rv-text" rows="4" value="{{rv.text}}" onChange="{{setRvText}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff; resize: vertical"></textarea></label>
+<a href="{{rvLink}}" target="_blank" rel="noopener" style="align-self: flex-start; text-decoration: none; font-weight: 700; font-size: 17px; padding: 16px 28px; background: #14532d; color: #ffffff; border-radius: 999px">Send review on WhatsApp</a>
+</div>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{showContactSec}}" hint-placeholder-val="{{ true }}">
+<section id="contact" style="background: #ffffff; border-top: 1px solid #e3e7df">
+<sc-if value="{{contactPage}}" hint-placeholder-val="{{ false }}">
+<div style="background: #0f3d22; color: #ffffff">
+<div style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 48px; display: flex; flex-direction: column; gap: 20px">
+<button type="button" onClick="{{closeContact}}" style="align-self: flex-start; font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 18px 0 12px; display: flex; align-items: center; gap: 6px; background: transparent; color: #ffffff; border: 1px solid #4f7a5f; border-radius: 999px; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back to home</button>
+<h1 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase">Contact <span style="color: {{accent}}">us</span></h1>
+<p style="margin: 0; max-width: 620px; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.55; color: #d3e6d9">Call us, chat on WhatsApp, send an email or visit our shop at Bhagat Singh Chowk, Hisar. We’re happy to help with orders and bulk prices.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="tel:+917015675236" style="text-decoration: none; font-weight: 700; font-size: 16px; padding: 15px 24px; background: {{accent}}; color: #0f3d22; border-radius: 999px">Call +91 70156 75236</a>
+<a href="https://wa.me/917015675236" target="_blank" rel="noopener" style="text-decoration: none; font-weight: 600; font-size: 16px; padding: 14px 23px; border: 1px solid #ffffff; color: #ffffff; border-radius: 999px">Chat on WhatsApp</a>
+<a href="mailto:yash@cartscaler.com" style="text-decoration: none; font-weight: 600; font-size: 16px; padding: 14px 23px; border: 1px solid #ffffff; color: #ffffff; border-radius: 999px">Email us</a>
+</div>
+</div>
+</div>
+</sc-if>
+<div style="max-width: 1200px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(2rem, 3.5vw, 2.75rem); letter-spacing: -0.02em">Visit or contact us</h2>
+<div style="display: flex; flex-direction: column; gap: 18px; font-size: 16px; line-height: 1.5">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #4a5650">Phone / WhatsApp</span><a href="tel:+917015675236" style="font-size: 20px; font-weight: 700; padding: 4px 0">+91 70156 75236</a>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px"><a href="tel:+917015675236" style="text-decoration: none; font-size: 15px; font-weight: 600; padding: 12px 20px; border: 1px solid #14532d; border-radius: 999px">Call now</a><a href="https://wa.me/917015675236" target="_blank" rel="noopener" style="text-decoration: none; font-size: 15px; font-weight: 600; padding: 12px 20px; background: #14532d; color: #ffffff; border-radius: 999px">Chat on WhatsApp</a></div></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #4a5650">Address</span><span>Bhagat Singh Chowk, Hisar, Haryana</span>
+<a href="https://www.google.com/maps/search/?api=1&amp;query=Bhagat+Singh+Chowk+Hisar+Haryana" target="_blank" rel="noopener" style="align-self: flex-start; margin-top: 6px; text-decoration: none; font-size: 15px; font-weight: 600; padding: 12px 20px; border: 1px solid #14532d; border-radius: 999px">Open in Google Maps</a></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #4a5650">Email</span><a href="mailto:yash@cartscaler.com" style="font-size: 18px; font-weight: 600; padding: 4px 0; overflow-wrap: anywhere">yash@cartscaler.com</a></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #4a5650">Opening hours</span><span>Mon – Sat: 10 AM – 8 PM</span>
+<span>Sunday: 10 AM – 3 PM</span></div>
+</div>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; background: #f7f8f4; border: 1px solid #e3e7df; border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 16px">
+<h3 style="margin: 0; font-size: 20px; font-weight: 600">Send an enquiry</h3>
+<label for="f-name" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Your name<input id="f-name" type="text" autocomplete="name" value="{{enq.name}}" onChange="{{setEnqName}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<label for="f-phone" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">Phone number<input id="f-phone" type="tel" autocomplete="tel" value="{{enq.phone}}" onChange="{{setEnqPhone}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff"></label>
+<label for="f-msg" style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 500">What do you need?<textarea id="f-msg" rows="4" value="{{enq.msg}}" onChange="{{setEnqMsg}}" style="font: inherit; font-weight: 400; font-size: 16px; padding: 12px 14px; border: 1px solid #c9d0c5; border-radius: 10px; background: #ffffff; resize: vertical"></textarea></label>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="{{enqWa}}" target="_blank" rel="noopener" style="flex: 1 1 180px; text-decoration: none; text-align: center; font-weight: 600; font-size: 16px; padding: 16px; background: #14532d; color: #ffffff; border-radius: 999px">Send on WhatsApp</a>
+<a href="{{enqMail}}" style="flex: 1 1 180px; text-decoration: none; text-align: center; font-weight: 600; font-size: 16px; padding: 15px; border: 1px solid #14532d; color: #14532d; border-radius: 999px">Send by Email</a>
+</div>
+</div>
+</div>
+</section>
+</sc-if>
+
+<sc-if value="{{showMain}}" hint-placeholder-val="{{ true }}">
+<section id="share" style="background: {{accent}}; color: #0f3d22">
+<div style="max-width: 1280px; margin: 0 auto; padding: 56px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; letter-spacing: -0.03em">Share PP Trading</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.55">Know a shop, caterer or friend who needs disposables? Send them our website.</p>
+<span style="font-size: 14px; font-weight: 500; padding: 10px 14px; background: #fff6d6; border-radius: 10px; overflow-wrap: anywhere">{{siteUrl}}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="{{shareWa}}" target="_blank" rel="noopener" style="text-decoration: none; font-weight: 700; font-size: 16px; padding: 16px 24px; background: #0f3d22; color: #ffffff; border-radius: 999px">Share on WhatsApp</a>
+<a href="{{shareFb}}" target="_blank" rel="noopener" style="text-decoration: none; font-weight: 700; font-size: 16px; padding: 15px 23px; border: 1px solid #0f3d22; color: #0f3d22; border-radius: 999px">Share on Facebook</a>
+<button type="button" onClick="{{copyLink}}" style="font: inherit; font-weight: 700; font-size: 16px; min-height: 52px; padding: 0 24px; border: 1px solid #0f3d22; background: #ffffff; color: #0f3d22; border-radius: 999px; cursor: pointer">{{copyText}}</button>
+</div>
+</div>
+</section>
+</sc-if>
+
+<footer style="background: #0f3d22; color: #d3e6d9">
+<div style="max-width: 1280px; margin: 0 auto; padding: 56px 24px 32px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: clamp(16px, 3vw, 32px)">
+<svg role="img" aria-label="PP Trading logo" width="112" height="112" viewBox="0 0 64 64" style="flex: none; width: clamp(64px, 10vw, 112px); height: auto"><rect width="64" height="64" rx="16" fill="#ffffff"></rect><path d="M17 48V16h11a9 9 0 0 1 0 18H17" fill="none" stroke="#0f3d22" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path><path d="M31 48V25h9.5a8 8 0 0 1 0 16H31" fill="none" stroke="#b7791f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: clamp(3rem, 10vw, 8rem); line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase; color: #ffffff">PP <span style="color: {{accent}}">Trading</span></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 14px; padding-top: 20px; border-top: 1px solid #2f5e41">
+<span>Disposable items — wholesale &amp; retail · Bhagat Singh Chowk, Hisar</span>
+<span>© 2026 PP Trading</span>
+</div>
+</div>
+</footer>
+
+<sc-if value="{{ false }}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 100; background: rgba(8, 28, 16, 0.62); display: flex; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box">
+<div role="dialog" aria-modal="true" aria-labelledby="pd-title" style="background: #ffffff; border-radius: 24px; width: 100%; max-width: 980px; max-height: 92vh; overflow: auto; display: flex; flex-wrap: wrap; box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3)">
+<div style="flex: 1 1 360px; min-width: 0; background: #f1f5ee; display: flex; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box">
+<img src="{{d.img}}" alt="{{d.name}}" style="display: block; width: 100%; max-height: 72vh; object-fit: contain; border-radius: 16px">
+</div>
+<div style="flex: 1 1 380px; min-width: 0; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; gap: 18px; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #14532d; background: #e3f0e6; padding: 6px 12px; border-radius: 999px">{{d.catLabel}}</span>
+<button type="button" onClick="{{closeDetail}}" aria-label="Close product details" style="flex: none; width: 44px; height: 44px; border-radius: 999px; border: 1px solid #c9d0c5; background: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1c2321" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<h2 id="pd-title" style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1.1; letter-spacing: -0.02em; color: #0f3d22">{{d.name}}</h2>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px">
+<span style="font-family: 'Space Grotesk', Inter, sans-serif; font-size: 32px; font-weight: 700; color: #14532d">{{d.price}}</span>
+<sc-if value="{{d.mrp}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 16px; color: #4a5650">MRP <s>{{d.mrp}}</s></span>
+<span style="font-size: 13px; font-weight: 800; color: #0f3d22; background: {{accent}}; padding: 4px 10px; border-radius: 999px">{{d.saveText}}</span>
+</sc-if>
+</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #47524d">{{d.desc}}</p>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #4a5650">Key features</h3>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{d.features}}" as="f" hint-placeholder-count="4">
+<li style="display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.45"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M20 6L9 17l-5-5"></path></svg><span>{{f.text}}</span></li>
+</sc-for>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #4a5650">Specifications</h3>
+<dl style="margin: 0; display: flex; flex-direction: column; gap: 1px; background: #e1e8dc; border: 1px solid #e1e8dc; border-radius: 12px; overflow: hidden">
+<sc-for list="{{d.specs}}" as="s" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 12px; padding: 11px 14px; background: #ffffff; font-size: 15px"><dt style="color: #4a5650">{{s.label}}</dt><dd style="margin: 0; font-weight: 600">{{s.value}}</dd></div>
+</sc-for>
+</dl>
+</div>
+<sc-if value="{{d.uses}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 15px; line-height: 1.55"><strong>Good for:</strong> {{d.uses}}</p>
+</sc-if>
+<sc-if value="{{d.hasOptions}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; font-weight: 600; color: #4a5650">{{d.chooseLabel}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{d.options}}" as="o" hint-placeholder-count="5">
+<button type="button" onClick="{{o.pick}}" aria-pressed="{{o.pressed}}" aria-label="{{o.aria}}" style="{{o.style}}">{{o.label}}</button>
+</sc-for>
+</div>
+<span style="font-size: 14px; color: #47524d">{{d.optNote}}</span>
+</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; padding-top: 4px">
+<button type="button" onClick="{{d.order}}" style="flex: 1 1 200px; font: inherit; font-size: 16px; font-weight: 700; min-height: 52px; padding: 0 20px; background: #14532d; color: #ffffff; border: none; border-radius: 999px; cursor: pointer">Add to order</button>
+<a href="#order" onClick="{{closeDetail}}" style="flex: 1 1 160px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 16px; font-weight: 600; min-height: 50px; border: 1px solid #14532d; border-radius: 999px">View order</a>
+</div>
+<sc-if value="{{d.inCart}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 15px; font-weight: 600; color: #15803d">✓ {{d.inCartText}}</span>
+</sc-if>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"brand":{"editor":"color","default":"#14532d","options":["#14532d","#1e3a8a","#7c2d12","#1c2321"]},"accent":{"editor":"color","default":"#f5c542","options":["#f5c542","#fb923c","#7dd3fc","#e3f0e6"]},"$preview":{"width":1440,"height":3300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const WHATSAPP = '917015675236'; // shop WhatsApp number with country code, e.g. '919876543210'
+    const st = this.state || {};
+    const cart = st.cart || [];
+    const form = st.form || { name: '', phone: '', email: '', address: '', pincode: '' };
+    // SHIPPING BY AREA: set each `charge` in rupees (null = confirmed on call).
+    const SHIP_AREAS = [
+      { id: 'local', label: 'Local (within Hisar)', charge: 60 },
+      { id: 'state', label: 'Rest of Haryana', charge: 90 },
+      { id: 'india', label: 'Rest of India', charge: 120 }
+    ];
+    const rs = (n) => '₹' + Number(n).toLocaleString('en-IN');
+    const qtyOf = (key) => { const f = cart.find((x) => x.key === key); return f ? f.qty : 0; };
+    const addToCart = (key, label, amount, n) => {
+      const add = n || 1;
+      const c = cart.slice();
+      const i = c.findIndex((x) => x.key === key);
+      if (i >= 0) c[i] = { ...c[i], qty: c[i].qty + add }; else c.push({ key, label, amount, qty: add });
+      this.setState({ cart: c });
+    };
+    const changeQty = (key, d) => this.setState({ cart: cart.map((x) => (x.key === key ? { ...x, qty: x.qty + d } : x)).filter((x) => x.qty > 0) });
+    const withOrder = (obj, key, label, amount) => {
+      const q = qtyOf(key);
+      return { ...obj, canOrder: amount > 0, askOnly: !(amount > 0), order: () => addToCart(key, label, amount), orderN: (n) => addToCart(key, label, amount, n), unitAmount: amount, inCart: q > 0, inCartText: 'In your order: ' + q };
+    };
+    const setField = (k) => (e) => this.setState({ form: { ...form, [k]: e.target.value } });
+    const CATS = [
+      { id: 'all', label: 'All products' },
+      { id: 'party', label: 'Party & café' },
+      { id: 'packing', label: 'Food packing' },
+      { id: 'cutlery', label: 'Wooden cutlery' },
+      { id: 'tissue', label: 'Tissues & napkins' },
+      { id: 'kitchen', label: 'Kitchen cleaning' }
+    ];
+    const CAT_LABELS = {};
+    CATS.forEach((c) => { CAT_LABELS[c.id] = c.label; });
+    // PRODUCTS: name, cat, desc, features (key points), specs ([label, value]), uses, price / options, img
+    const perPiece = (price, pcs, word) => { const v = price / (pcs || 1); return '₹' + (Number.isInteger(v) ? v : (Math.round(v * 100) / 100).toFixed(2)) + ' per ' + word; };
+    const allProducts = [
+        { cat: 'party', quality: 'Bio plates, ripple paper glasses, 2-ply napkins, natural wooden cutlery', pcs: 1, pieceWord: 'combo', name: 'Party combo (small party)', desc: 'Everything you need for a small party, packed together in one combo.', features: ['25 ripple glasses (130 ml) for tea and coffee', '25 bio plates with 3 partitions', '50 soft 2-ply napkins', '25 wooden spoons and 25 wooden forks', 'One pack, no need to buy items separately'], specs: [['Items in combo', '5 products'], ['Ripple glasses', '25 × 130 ml'], ['Bio plates', '25 × 3 partition'], ['Napkins', '50 × 2 ply'], ['Wooden cutlery', '25 spoons + 25 forks']], uses: 'Birthday parties, kitty parties, puja, small get-togethers', info: 'Combo of 5 items', price: '₹399 / combo', img: './assets/51e3f3898fc013c6b57d269dbe557621.jpg', square: true },
+        { cat: 'party', quality: 'Clear sipper glass with matching lid, 350 ml', more: ['./assets/e3cdf5a192dca66182cbc86bc9517570.jpg'], pcs: 25, pieceWord: 'glass', name: 'Cold coffee sipper glass', desc: 'Clear sipper glasses with lids for cold coffee, shakes and cold drinks.', features: ['Clear glass shows off the drink inside', 'Comes with matching lids', 'Made for cafés and cold beverages'], specs: [['Capacity', '350 ml (approx. 12 oz)'], ['Pack', '25 glasses with lids']], uses: 'Cafés, juice and shake shops, cold coffee, parties', info: '25 glasses with lids · 350 ml', price: '₹299 / pack', img: './assets/735e1163cac180febf55263a81b12ea4.jpg' },
+        { cat: 'party', quality: 'Eco-friendly paper, plastic free', pcs: 50, pieceWord: 'straw', name: 'Paper straws', desc: 'Colourful eco-friendly paper straws in 5 fun designs.', features: ['Eco-friendly paper, not plastic', '5 designs: purple, green, pink, green dots, yellow', 'Buy more packs and save more'], specs: [['Pack', '50 straws'], ['Material', 'Paper'], ['Designs', 'Purple, green, pink, green dots, yellow']], uses: 'Cafés, juice shops, birthday parties, events', info: '50 straws per pack', img: './assets/bf3181c7fa352e1b01d095a933f91340.jpg', per: 50, options: [
+          { n: 1, price: 99 }, { n: 2, price: 149 }, { n: 3, price: 199 }, { n: 4, price: 229 }, { n: 5, price: 249 }
+        ] },
+        { cat: 'packing', quality: 'Black multi-compartment base with clear lid', pcs: 25, pieceWord: 'tray', name: 'Meal tray with lid', desc: 'Black compartment meal tray with a clear lid for complete meals.', features: ['Separate compartments keep every dish apart', 'Clear lid lets you see the food inside', 'Neat, premium look for takeaway'], specs: [['Pack', '25 trays with lids'], ['Colour', 'Black base, clear lid'], ['Type', 'Multi-compartment']], uses: 'Thali, tiffin services, takeaway, catering orders', info: '25 pcs with lids', price: '₹449 / pack', img: './assets/8312abb412b60ebc4e67e3dd0f73c02d.jpg' },
+        { cat: 'packing', quality: 'Food-grade, BPA free, fridge and freezer safe', pcs: 1, pieceWord: 'roll', name: 'Cling film (food wrap)', desc: 'Food-grade cling film that locks in freshness.', features: ['Food-grade cling film', 'Keeps food fresher for longer', 'Safe for fridge and freezer', 'BPA free'], specs: [['Pack', '1 roll in box'], ['Type', 'Food wrap cling film']], uses: 'Home kitchens, leftovers, fruits, tiffin', info: '1 roll in box', price: '₹99', img: './assets/82871b16760daa15ad08964b3ba504e3.jpg' },
+        { cat: 'packing', quality: 'Heavy-duty 600 m roll, 1 kg', pcs: 1, pieceWord: 'roll', name: 'Cling film jumbo roll', desc: 'Big 600 m cling film roll for heavy daily use.', features: ['Extra long 600 m roll', 'Keeps food, fruits and vegetables fresh', 'Comes in a dispenser box', 'Best value for shops and restaurants'], specs: [['Length', '600 m'], ['Weight', '1 kg roll']], uses: 'Restaurants, caterers, fruit and vegetable shops', info: '1 kg roll · 600 m', price: '₹349 / roll', img: './assets/fce3172a2c2f730607f6b385002d823d.jpg' },
+        { cat: 'packing', quality: 'Organic paper, no aluminium, no plastic', pcs: 1, pieceWord: 'roll', name: 'Butter paper roll', desc: 'Food wrapping butter paper that keeps rotis soft and fresh.', features: ['No aluminium, no plastic', '100% organic paper (as printed on pack)', 'Wrap roti, paratha, sandwich and burger', 'Can also be used to reheat food'], specs: [['Net weight', '500 g'], ['Type', 'Food wrapping butter paper']], uses: 'Tiffin, home kitchens, dhabas, fast food', info: '500 g roll', price: '₹199 / roll', img: './assets/dcb6385e96151715bab5429e13964165.jpg' },
+        { cat: 'cutlery', quality: 'Natural wood, 120 mm', pcs: 100, pieceWord: 'spoon', name: 'Wooden spoon', desc: 'Natural wooden spoons, an eco-friendly swap for plastic.', features: ['Natural wood, plastic free', 'Handy 120 mm size', 'Bulk pack of 100'], specs: [['Size', '120 mm'], ['Pack', '100 pieces'], ['Material', 'Wood']], uses: 'Ice cream, desserts, meals, events', info: '100 pcs · 120 mm', price: '₹99 / pack', img: './assets/50331d21e4fadaf41fe488b459c98771.jpg' },
+        { cat: 'cutlery', quality: 'Natural wood, 120 mm', pcs: 100, pieceWord: 'fork', name: 'Wooden fork', desc: 'Natural wooden forks, an eco-friendly swap for plastic.', features: ['Natural wood, plastic free', 'Handy 120 mm size', 'Bulk pack of 100'], specs: [['Size', '120 mm'], ['Pack', '100 pieces'], ['Material', 'Wood']], uses: 'Snacks, salads, noodles, meals, events', info: '100 pcs · 120 mm', price: '₹99 / pack', img: './assets/3f9c0ecc93a8cded8987c5612ba588de.jpg' },
+        { cat: 'tissue', quality: '100% virgin pulp, 2 ply, skin friendly', more: ['./assets/b0e29af81d1615f9c02328af87e75122.jpg', './assets/c03fe37b7ef0d90cb8142ae27ce065d6.jpg', './assets/38e38da4c8ba1d54ee6b35353c511a63.jpg'], pcs: 1, pieceWord: 'box', name: 'Face tissue box (car box)', desc: 'Soft 2-ply facial tissues in a handy box for car, home and office.', features: ['100% virgin pulp', 'Skin friendly and chemical free', 'Highly absorbent', 'Soft 2-ply sheets'], specs: [['Sheets', '200 per box (100 pulls)'], ['Ply', '2 ply'], ['Material', '100% virgin pulp']], uses: 'Car, home, office, travel, skin care', info: '200 sheets · 2 ply', img: './assets/4c3044579fed2bdd2425b56c6863be19.jpg', per: 200, unit: 'box', units: 'boxes', itemWord: 'sheets', options: [
+          { n: 1, price: 99 }, { n: 2, price: 149 }, { n: 3, price: 189 }, { n: 4, price: 229 }, { n: 5, price: 259 }, { n: 6, price: 299 }
+        ] },
+        { cat: 'tissue', quality: '2 ply, ultra soft, perforated', pcs: 6, pieceWord: 'roll', name: 'Toilet paper rolls', desc: 'Soft and strong 2-ply toilet rolls, pack of 6.', features: ['Ultra soft for skin', 'Perforated sheets tear easily', 'Highly absorbent and clog free', 'Dispenser friendly and hygienic'], specs: [['Pack', '6 rolls'], ['Ply', '2 ply'], ['MRP', '₹425']], uses: 'Homes, offices, hotels, restaurants', info: '6 rolls · 2 ply', price: '₹149 / pack', mrp: '₹425', img: './assets/f63d9815fcbf0c0af8be9a98ac11038d.jpg' },
+        { cat: 'tissue', quality: '2 ply, soft embossed sheets', more: ['./assets/c230c250702c5b625f4ecd6212d206be.jpg', './assets/9360e7d82525a9c421d3f536afc01dad.jpg', './assets/24bde06ebd8708ab5f87d014779d75ae.jpg', './assets/5d3b36fb3485d459ff8adc6b279317a5.jpg'], pcs: 50, pieceWord: 'napkin', name: 'Paper napkins', desc: 'Soft embossed 2-ply table napkins.', features: ['Soft 2-ply sheets', 'Embossed design looks neat on the table', 'Handy pack of 50'], specs: [['Pack', '50 sheets (50 pulls)'], ['Ply', '2 ply']], uses: 'Dining tables, restaurants, parties, events', info: '50 sheets · 2 ply', price: '₹79 / pack', img: './assets/79e3cdb2955cb2215910319c40fea81f.jpg' },
+        { cat: 'kitchen', quality: 'Non-woven fabric, reusable 3–4 times', pcs: 50, pieceWord: 'sheet', name: 'Non-woven kitchen cleaning roll', desc: 'Reusable non-woven cleaning roll that soaks up spills fast.', features: ['Super absorbent', 'Streak-free cleaning', 'Durable and long lasting', 'Safe for all surfaces', 'Reusable: each sheet 3 to 4 times'], specs: [['Sheets', '50 per roll'], ['Material', 'Non-woven fabric'], ['Reuse', '3–4 times per sheet']], uses: 'Kitchen slabs, stoves, tables, glass, utensils', info: '50 sheets per roll', price: '₹199 / roll', img: './assets/b90d31830a34e3aaa49f1585c5f1a294.jpg' },
+        { cat: 'kitchen', quality: 'Checked kitchen dusters, pack of 12', pcs: 12, pieceWord: 'piece', name: 'Kitchen towel / duster', desc: 'Checked kitchen dusters for wiping, drying and cleaning.', features: ['Classic checked design', 'Pack of 12 for kitchen and home', 'Wipe, dry and clean every day'], specs: [['Pack', '12 pieces'], ['Use', 'Kitchen duster / towel']], uses: 'Kitchens, restaurants, shops, home cleaning', info: '12 pcs per pack', price: '₹199 / pack', img: './assets/487cb892bafcded7489f009fc4727e32.jpg' }
+      ].map((p) => {
+        const pm = /₹\s*([\d,]+)/.exec(p.price || ''), mm = /₹\s*([\d,]+)/.exec(p.mrp || '');
+        const pNum = pm ? Number(pm[1].replace(/,/g, '')) : 0, mNum = mm ? Number(mm[1].replace(/,/g, '')) : 0;
+        const base = { ...p, hasImg: !!p.img, noImg: !p.img, info: p.info || '', mrp: p.mrp || '', hasOptions: !!p.options,
+          imgStyle: 'display: block; width: 100%; aspect-ratio: ' + (p.square ? '1 / 1' : '4 / 3') + '; object-fit: cover; background: #ffffff; border-bottom: 1px solid #e3e7df',
+          catLabel: CAT_LABELS[p.cat] || '',
+          featuresShort: (p.features || []).slice(0, 3).map((t) => ({ text: t })),
+          features: (p.features || []).map((t) => ({ text: t })),
+          specs: (p.specs || []).map((s) => ({ label: s[0], value: s[1] })),
+          uses: p.uses || '',
+          saveText: mNum > pNum && pNum > 0 ? Math.round((1 - pNum / mNum) * 100) + '% OFF' : '',
+          detailAria: 'View details of ' + p.name,
+          gallery: [p.img].concat(p.more || []),
+          quality: p.quality || '',
+          packPrice: p.options ? p.options[0].price : pNum,
+          pcsNum: p.pcs || 1,
+          pieceWord: p.pieceWord || 'piece',
+          perPieceText: pNum ? perPiece(pNum, p.pcs || 1, p.pieceWord || 'piece') : '',
+          bulkPackLabel: p.options ? ('1 ' + (p.unit || 'pack') + ' = ' + (p.pcs || 1) + ' ' + (p.pieceWord || 'piece') + (p.pcs > 1 ? 's' : '')) : (p.info || '1 pack'),
+          openBulk: () => { this.setState({ page: 'bulk', detail: null, bulkSel: p.name, bulkQty: null }); try { window.scrollTo(0, 0); } catch (e) {} },
+          openDetail: () => { this.setState({ detail: p.name, gi: 0, qty: 1, page: null }); try { window.scrollTo(0, 0); } catch (e) {} } };
+        if (!p.options) {
+          const m = /₹\s*([\d,]+)/.exec(p.price || '');
+          return withOrder(base, p.name, p.name + (p.info ? ' (' + p.info + ')' : ''), m ? Number(m[1].replace(/,/g, '')) : 0);
+        }
+        const sel = (this.state && this.state.sel && this.state.sel[p.name]) || 0;
+        const chosen = p.options[sel];
+        const pill = 'font: inherit; font-size: 14px; font-weight: 600; min-height: 44px; padding: 0 14px; border-radius: 999px; cursor: pointer; ';
+        const u1 = p.unit || 'pack', uN = p.units || 'packs', word = p.itemWord || 'straws';
+        const lbl = (n) => n === 1 ? '1 ' + u1 : n + ' ' + uN;
+        return withOrder({ ...base,
+          chooseLabel: 'Choose ' + uN,
+          price: '₹' + chosen.price + (chosen.n === 1 ? ' / ' + u1 : ' for ' + chosen.n + ' ' + uN),
+          optNote: (chosen.n * p.per) + ' ' + word + ' in total',
+          perPieceText: perPiece(chosen.price, chosen.n * (p.pcs || 1), p.pieceWord || 'piece'),
+          options: p.options.map((o, i) => ({
+            label: lbl(o.n),
+            aria: lbl(o.n) + ', ₹' + o.price,
+            pressed: i === sel ? 'true' : 'false',
+            style: pill + (i === sel ? 'background: #14532d; color: #ffffff; border: 1px solid #14532d' : 'background: #ffffff; color: #14532d; border: 1px solid #c9d0c5'),
+            total: '₹' + o.price,
+            each: '₹' + Math.round(o.price / o.n) + ' per ' + u1 + ' · ' + (o.n * p.per) + ' ' + word,
+            rowStyle: 'font: inherit; text-align: left; min-height: 52px; padding: 10px 16px; border-radius: 14px; cursor: pointer; display: grid; grid-template-columns: minmax(80px, 1fr) minmax(0, 2fr) auto; align-items: center; gap: 12px; ' + (i === sel ? 'background: #0f3d22; color: #ffffff; border: 1px solid #0f3d22' : 'background: #ffffff; color: #1c2321; border: 1px solid #c9d0c5'),
+            pick: () => this.setState({ sel: { ...((this.state && this.state.sel) || {}), [p.name]: i } })
+          }))
+        }, p.name + ' – ' + lbl(chosen.n), p.name + ' – ' + lbl(chosen.n) + ' (' + (chosen.n * p.per) + ' ' + word + ')', chosen.price);
+      });
+    const curCat = st.cat || 'all';
+    const products = allProducts.filter((x) => curCat === 'all' || x.cat === curCat);
+    const catPill = 'font: inherit; font-size: 15px; font-weight: 600; min-height: 44px; padding: 0 18px; border-radius: 999px; cursor: pointer; ';
+    const cats = CATS.map((c) => {
+      const n = c.id === 'all' ? allProducts.length : allProducts.filter((x) => x.cat === c.id).length;
+      const on = c.id === curCat;
+      return { label: c.label + ' (' + n + ')', pressed: on ? 'true' : 'false', style: catPill + (on ? 'background: #0f3d22; color: #ffffff; border: 1px solid #0f3d22' : 'background: #ffffff; color: #0f3d22; border: 1px solid #c9d0c5'), pick: () => this.setState({ cat: c.id }) };
+    });
+    const detailP = allProducts.find((x) => x.name === st.detail) || null;
+    let dView = null;
+    if (detailP) {
+      const gal = detailP.gallery;
+      const gi = Math.min(st.gi || 0, gal.length - 1);
+      const qty = Math.max(1, st.qty || 1);
+      const thumbBase = 'width: 76px; height: 76px; padding: 0; border-radius: 14px; overflow: hidden; cursor: pointer; background: #ffffff; ';
+      const related = allProducts.filter((x) => x.cat === detailP.cat && x.name !== detailP.name);
+      const goOrder = () => { const el = document.getElementById('order'); if (el) el.scrollIntoView({ behavior: 'smooth' }); };
+      dView = { ...detailP,
+        mainImg: gal[gi],
+        hasGallery: gal.length > 1,
+        thumbs: gal.map((src, i) => ({ src, aria: 'Show photo ' + (i + 1) + ' of ' + gal.length, pressed: i === gi ? 'true' : 'false', style: thumbBase + (i === gi ? 'border: 3px solid #14532d' : 'border: 1px solid #c9d0c5'), pick: () => this.setState({ gi: i }) })),
+        noTiers: !detailP.hasOptions,
+        bulkLink: 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent('Hi PP Trading, please share your bulk price for: ' + detailP.name),
+        qty,
+        qtyTotal: rs(detailP.unitAmount * qty),
+        incQty: () => this.setState({ qty: qty + 1 }),
+        decQty: () => this.setState({ qty: Math.max(1, qty - 1) }),
+        addQty: () => detailP.orderN(qty),
+        buyNow: () => { detailP.orderN(qty); this.setState({ detail: null, page: 'order', step: 'cart' }); try { window.scrollTo(0, 0); } catch (e) {} },
+        related: related.map((r) => ({ name: r.name, img: r.img, price: r.price, openDetail: r.openDetail })),
+        hasRelated: related.length > 0 };
+    }
+    const goTo = (id) => (e) => {
+      if (this.state && (this.state.detail || this.state.page)) {
+        if (e && e.preventDefault) e.preventDefault();
+        this.setState({ detail: null, page: null }, () => setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 50));
+      }
+    };
+    const contactPage = !detailP && st.page === 'contact';
+    const orderPage = !detailP && st.page === 'order';
+    const step = orderPage && st.step === 'details' && cart.length > 0 ? 'details' : 'cart';
+    const accentC = this.props.accent ?? '#f5c542';
+    const steps = ['1. Check your items', '2. Delivery details', '3. Pay by UPI', '4. Send on WhatsApp'].map((label, i) => {
+      const cur = step === 'details' ? 1 : 0;
+      return { label, style: 'padding: 6px 12px; border-radius: 999px; ' + (i === cur ? 'background: ' + accentC + '; color: #0f3d22' : (i < cur ? 'color: #ffffff; border: 1px solid #4f7a5f' : 'color: #b9d3c2; border: 1px solid #2f5e41')) };
+    });
+    const subtotal = cart.reduce((s, x) => s + x.amount * x.qty, 0);
+    const pin = String(form.pincode || '').replace(/\D/g, '');
+    const area = SHIP_AREAS.find((a) => a.id === st.area) || null;
+    const ship = area ? area.charge : null;
+    const shipKnown = !!area && ship !== null && ship !== undefined;
+    const SHIPPING_CHARGE = 99; // flat shipping per order, in rupees
+    const total = subtotal + (cart.length ? SHIPPING_CHARGE : 0);
+    const UPI_ID = ''; // shop UPI ID for payments, e.g. 'pptrading@okaxis'
+    const SITE_URL = 'https://claude.ai/artifact/R7LMuWoW3oZB4dxahjw3s5';
+    const EMAIL = 'yash@cartscaler.com';
+    // CUSTOMER REVIEWS: add real reviews here, e.g. { name: 'Rahul', place: 'Hisar', rating: 5, text: '...' }
+    // Entries with sample: true are demo only (shown with a label, not counted in the rating). Remove before sharing the site.
+    const REVIEWS = [
+    ];
+    const REAL_REVIEWS = REVIEWS.filter((r) => !r.sample);
+    const utr = String(form.utr || '').trim();
+    const upiReady = !!UPI_ID;
+    const sendReady = cart.length > 0 && (!upiReady || utr.length >= 6);
+    const enq = st.enq || { name: '', phone: '', msg: '' };
+    const setEnq = (k) => (e) => this.setState({ enq: { ...enq, [k]: e.target.value } });
+    const enqText = 'Enquiry from PP Trading website\n\nName: ' + (enq.name || '') + '\nPhone: ' + (enq.phone || '') + '\n\n' + (enq.msg || '');
+    const shipText = !area ? 'Choose area' : (shipKnown ? (ship === 0 ? 'Free' : rs(ship)) : 'Confirmed on call');
+    const shipNote = !area ? 'Choose your delivery area in delivery details to see the shipping charge.' : (shipKnown ? 'Shipping charge for ' + area.label + '.' : 'We will call you to confirm the shipping charge for ' + area.label + '.');
+    const areaPill = 'font: inherit; font-size: 15px; font-weight: 500; min-height: 48px; padding: 0 16px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: left; ';
+    const areas = SHIP_AREAS.map((a) => ({
+      label: a.label,
+      chargeText: a.charge === null || a.charge === undefined ? 'On call' : (a.charge === 0 ? 'Free' : rs(a.charge)),
+      pressed: area && area.id === a.id ? 'true' : 'false',
+      style: areaPill + (area && area.id === a.id ? 'background: #14532d; color: #ffffff; border: 1px solid #14532d' : 'background: #ffffff; color: #1c2321; border: 1px solid #c9d0c5'),
+      pick: () => this.setState({ area: a.id })
+    }));
+    const count = cart.reduce((s, x) => s + x.qty, 0);
+    const lines = cart.map((x, i) => (i + 1) + '. ' + x.label + ' × ' + x.qty + ' = ' + rs(x.amount * x.qty));
+    const msg = 'New order from PP Trading website\n\n' + lines.join('\n') + '\n\nSubtotal: ' + rs(subtotal) + '\nShipping: ' + rs(SHIPPING_CHARGE) + '\nTotal: ' + rs(total) +
+      '\n\nName: ' + (form.name || '') + '\nPhone: ' + (form.phone || '') + '\nEmail: ' + (form.email || '') + '\nAddress: ' + (form.address || '') + '\nPincode: ' + pin +
+      '\n\nPayment: ' + (upiReady ? (utr ? 'Paid by UPI, transaction ID ' + utr : 'Not paid yet') : 'Please send UPI details');
+    const BULK_MIN = 10000, BULK_OFF = 0.10;
+    const bulkPage = !detailP && st.page === 'bulk';
+    const bulkSelP = allProducts.find((x) => x.name === st.bulkSel) || null;
+    const tileBase = 'font: inherit; text-align: left; padding: 0; border-radius: 18px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; background: #ffffff; ';
+    const bulkProducts = allProducts.map((x) => ({
+      name: x.name, img: x.img, packLabel: x.bulkPackLabel, packPrice: rs(x.packPrice),
+      perPiece: perPiece(x.packPrice, x.pcsNum, x.pieceWord),
+      pressed: bulkSelP && bulkSelP.name === x.name ? 'true' : 'false',
+      style: tileBase + (bulkSelP && bulkSelP.name === x.name ? 'border: 3px solid #14532d; box-shadow: 0 0 0 4px #e3f0e6' : 'border: 1px solid #e1e8dc'),
+      pick: () => this.setState({ bulkSel: x.name, bulkQty: null })
+    }));
+    let bk = { name: '', img: '', packLabel: '', packPrice: '', perPiece: '', qtyStr: '', minLabel: '', piecesText: '', qtyLine: '', subtotal: '', discount: '', total: '', perPieceAfter: '', below: false, meets: false, canSend: false, warnText: '', saveText: '', waLink: '' };
+    if (bulkSelP) {
+      const pp = bulkSelP.packPrice, pcs = bulkSelP.pcsNum, word = bulkSelP.pieceWord;
+      const minPacks = Math.ceil(BULK_MIN / pp);
+      const qtyStr = st.bulkQty !== null && st.bulkQty !== undefined ? String(st.bulkQty) : String(minPacks);
+      const q = Math.max(0, parseInt(qtyStr, 10) || 0);
+      const sub = pp * q;
+      const meets = sub >= BULK_MIN;
+      const off = meets ? Math.round(sub * BULK_OFF) : 0;
+      const after = sub - off;
+      const tot = after + (q > 0 ? SHIPPING_CHARGE : 0);
+      const need = meets ? 0 : Math.ceil((BULK_MIN - sub) / pp);
+      const bmsg = 'BULK ORDER from PP Trading website\n\nProduct: ' + bulkSelP.name + '\nPack: ' + bulkSelP.bulkPackLabel + '\nPrice per pack: ' + rs(pp) +
+        '\nQuantity: ' + q + ' packs (' + (q * pcs) + ' pcs)\n\nSubtotal: ' + rs(sub) + '\nBulk discount (10%): -' + rs(off) + '\nShipping: ' + rs(SHIPPING_CHARGE) + '\nTotal: ' + rs(tot) +
+        '\nPrice per piece after discount: ' + (q ? perPiece(after, q * pcs, word) : '-') +
+        '\n\nName: ' + (form.name || '') + '\nPhone: ' + (form.phone || '') + '\nAddress: ' + (form.address || '') + '\nPincode: ' + pin;
+      bk = {
+        name: bulkSelP.name, img: bulkSelP.img, packLabel: bulkSelP.bulkPackLabel, packPrice: rs(pp), perPiece: perPiece(pp, pcs, word),
+        qtyStr, setQty: (e) => this.setState({ bulkQty: e.target.value }),
+        inc: () => this.setState({ bulkQty: q + 1 }), dec: () => this.setState({ bulkQty: Math.max(1, q - 1) }),
+        add10: () => this.setState({ bulkQty: q + 10 }), setMin: () => this.setState({ bulkQty: minPacks }),
+        minLabel: 'Minimum (' + minPacks + ' packs)',
+        piecesText: q + ' packs = ' + (q * pcs) + ' pcs · minimum ' + minPacks + ' packs for ₹10,000',
+        qtyLine: q + ' packs × ' + rs(pp),
+        subtotal: rs(sub), discount: meets ? '−' + rs(off) : 'Not yet', total: rs(tot),
+        perPieceAfter: q ? perPiece(after, q * pcs, word) : '—',
+        below: !meets, meets, canSend: meets,
+        warnText: 'Minimum bulk order is ₹10,000. Add ' + need + ' more ' + (need === 1 ? 'pack' : 'packs') + ' to unlock 10% off.',
+        saveText: 'You save ' + rs(off) + ' with 10% bulk discount!',
+        waLink: 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(bmsg)
+      };
+    }
+    const rvState = st.rv || { name: '', city: '', rating: 5, text: '' };
+    const catNames = CATS.filter((c) => c.id !== 'all' && allProducts.some((x) => x.cat === c.id)).map((c) => c.label.toLowerCase());
+    const heroLine = allProducts.length + ' products across ' + (catNames.length > 1 ? catNames.slice(0, -1).join(', ') + ' and ' + catNames[catNames.length - 1] : catNames.join('')) + ', for homes, restaurants, caterers and events.';
+    const qualityList = allProducts.filter((x) => x.quality).map((x) => ({ name: x.name, quality: x.quality, openDetail: x.openDetail, detailAria: x.detailAria }));
+    return {
+      brand: this.props.brand ?? '#14532d',
+      productCount: allProducts.length,
+      heroLine,
+      qualityList,
+      accent: this.props.accent ?? '#f5c542',
+      products,
+      cats,
+      detailOpen: !!detailP,
+      showMain: !detailP && !contactPage && !orderPage && !bulkPage && st.page !== 'why' && st.page !== 'reviews',
+      showContactSec: !detailP && !orderPage && !bulkPage && st.page !== 'why' && st.page !== 'reviews',
+      showWhySec: !detailP && !orderPage && !bulkPage && !contactPage && st.page !== 'reviews',
+      showReviewsSec: !detailP && !orderPage && !bulkPage && !contactPage && st.page !== 'why',
+      reviewsPage: !detailP && st.page === 'reviews',
+      openReviews: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ page: 'reviews', detail: null }); try { window.scrollTo(0, 0); } catch (err) {} },
+      rv: rvState,
+      setRvName: (e) => this.setState({ rv: { ...rvState, name: e.target.value } }),
+      setRvCity: (e) => this.setState({ rv: { ...rvState, city: e.target.value } }),
+      setRvText: (e) => this.setState({ rv: { ...rvState, text: e.target.value } }),
+      rvStars: [1, 2, 3, 4, 5].map((n) => ({ aria: n + (n === 1 ? ' star' : ' stars'), pressed: n === rvState.rating ? 'true' : 'false', style: 'font: inherit; font-size: 30px; line-height: 1; width: 48px; height: 48px; border: none; background: none; cursor: pointer; color: ' + (n <= rvState.rating ? '#b7791f' : '#c9d0c5'), pick: () => this.setState({ rv: { ...rvState, rating: n } }) })),
+      rvLink: 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent('My review for PP Trading\n\nName: ' + (rvState.name || '') + '\nCity: ' + (rvState.city || '') + '\nRating: ' + rvState.rating + '/5\n\nReview: ' + (rvState.text || '')),
+      whyPage: !detailP && st.page === 'why',
+      openWhy: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ page: 'why', detail: null }); try { window.scrollTo(0, 0); } catch (err) {} },
+      bulkPage,
+      bulkProducts,
+      bulkHasSel: !!bulkSelP,
+      bulkNoSel: !bulkSelP,
+      bk,
+      openBulk: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ page: 'bulk', detail: null }); try { window.scrollTo(0, 0); } catch (err) {} },
+      orderPage,
+      steps,
+      cartStep: step === 'cart',
+      cartStepHas: step === 'cart' && cart.length > 0,
+      detailsStep: step === 'details',
+      goDetails: () => { this.setState({ step: 'details' }); try { window.scrollTo(0, 0); } catch (err) {} },
+      goCart: () => { this.setState({ step: 'cart' }); try { window.scrollTo(0, 0); } catch (err) {} },
+      showFloatCart: cart.length > 0 && !orderPage,
+      openOrder: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ page: 'order', detail: null, step: 'cart' }); try { window.scrollTo(0, 0); } catch (err) {} },
+      contactPage,
+      openContact: (e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({ page: 'contact', detail: null }); try { window.scrollTo(0, 0); } catch (err) {} },
+      closeContact: () => { this.setState({ page: null }); try { window.scrollTo(0, 0); } catch (err) {} },
+      d: dView || { name: '', img: '', mainImg: '', catLabel: '', price: '', mrp: '', saveText: '', desc: '', info: '', quality: '', features: [], specs: [], uses: '', options: [], hasOptions: false, noTiers: false, chooseLabel: '', optNote: '', inCart: false, inCartText: '', thumbs: [], hasGallery: false, related: [], hasRelated: false, qty: 1, qtyTotal: '', order: () => {} },
+      closeDetail: () => { this.setState({ detail: null }, () => setTimeout(() => { const el = document.getElementById('products'); if (el) el.scrollIntoView(); }, 50)); },
+      go: { top: goTo('top'), products: goTo('products'), why: goTo('why'), bulk: goTo('bulk'), reviews: goTo('reviews'), share: goTo('share'), order: goTo('order'), contact: goTo('contact') },
+      cart: cart.map((x) => ({
+        label: x.label,
+        qty: x.qty,
+        each: rs(x.amount) + ' each',
+        lineTotal: rs(x.amount * x.qty),
+        inc: () => changeQty(x.key, 1),
+        dec: () => changeQty(x.key, -1),
+        remove: () => changeQty(x.key, -x.qty),
+        incLabel: 'Add one more ' + x.label,
+        decLabel: 'Remove one ' + x.label,
+        removeLabel: 'Remove ' + x.label + ' from order'
+      })),
+      cartEmpty: cart.length === 0,
+      cartHas: cart.length > 0,
+      cartTotal: rs(total),
+      shipFlat: rs(SHIPPING_CHARGE),
+      cartSubtotal: rs(subtotal),
+      shipText,
+      shipNote,
+      shipFormNote: !area ? '' : 'Shipping: ' + shipText,
+      areas,
+      setPincode: setField('pincode'),
+      cartCountText: count === 1 ? '1 item' : count + ' items',
+      cartNav: count > 0 ? 'Your order (' + count + ')' : 'Your order',
+      form,
+      setName: setField('name'),
+      setPhone: setField('phone'),
+      setEmail: setField('email'),
+      setAddress: setField('address'),
+      waLink: 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg),
+      setUtr: setField('utr'),
+      upiReady,
+      upiMissing: !upiReady,
+      upiId: UPI_ID,
+      upiLink: 'upi://pay?pa=' + encodeURIComponent(UPI_ID) + '&pn=' + encodeURIComponent('PP Trading') + '&am=' + total + '&cu=INR&tn=' + encodeURIComponent('PP Trading order'),
+      sendReady,
+      sendBlocked: !sendReady,
+      sendBlockedText: cart.length === 0 ? 'Add products to send your order' : 'Pay first, then enter your UPI transaction ID',
+      enq,
+      setEnqName: setEnq('name'),
+      setEnqPhone: setEnq('phone'),
+      setEnqMsg: setEnq('msg'),
+      enqWa: 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(enqText),
+      enqMail: 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Enquiry from PP Trading website') + '&body=' + encodeURIComponent(enqText),
+      siteUrl: SITE_URL,
+      shareWa: 'https://wa.me/?text=' + encodeURIComponent('PP Trading – disposable items, wholesale & retail, Hisar. Order online: ' + SITE_URL),
+      shareFb: 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(SITE_URL),
+      copyText: st.copied === true ? 'Link copied' : (st.copied === 'fail' ? 'Copy the link above' : 'Copy link'),
+      copyLink: () => {
+        try {
+          navigator.clipboard.writeText(SITE_URL).then(() => { this.setState({ copied: true }); setTimeout(() => this.setState({ copied: false }), 2500); }, () => this.setState({ copied: 'fail' }));
+        } catch (e) { this.setState({ copied: 'fail' }); }
+      },
+      reviews: REVIEWS.map((r) => ({ text: r.text, sample: !!r.sample, initial: String(r.name || '?').trim().charAt(0).toUpperCase(), who: (r.name || '') + (r.place ? ', ' + r.place : '') + (r.sample ? ' (sample)' : ''), stars: '★★★★★'.slice(0, r.rating || 5), starsLabel: (r.rating || 5) + ' out of 5 stars' })),
+      reviewsHas: REVIEWS.length > 0,
+      rvSummary: (() => {
+        const n = REAL_REVIEWS.length;
+        const avg = n ? REAL_REVIEWS.reduce((s, r) => s + (r.rating || 5), 0) / n : 0;
+        const full = Math.round(avg);
+        return { avg: n ? avg.toFixed(1) : '–', stars: n ? '★★★★★'.slice(0, full) + '☆☆☆☆☆'.slice(0, 5 - full) : '☆☆☆☆☆', starsLabel: n ? avg.toFixed(1) + ' out of 5 stars' : 'No ratings yet', countText: n === 0 ? 'No reviews yet' : (n === 1 ? 'Based on 1 review' : 'Based on ' + n + ' reviews') };
+      })(),
+      noReviews: REVIEWS.length === 0,
+      reviewLink: 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent('My review for PP Trading:\n\nName:\nCity:\nRating (1-5):\nReview:')
+    };
+  }
+}
+</script>
+</body>
+</html>
